@@ -11,7 +11,7 @@ var (
 	LogSavePath = "runtime/logs/"
 	LogSaveName = "log"
 	LogFileExt  = "log"
-	TimeFormat  = "20210713"
+	TimeFormat  = "2021-07-13"
 )
 
 // 获取日志路径
@@ -22,7 +22,7 @@ func getLogFilePath() string {
 // 获取实际文件全路径
 func getLogFileFullPath() string {
 	prefixPath := getLogFilePath()
-	suffixPath := fmt.Sprintf("%s%s.%s", LogSaveName, time.Now().Format(TimeFormat), LogFileExt)
+	suffixPath := fmt.Sprintf("%s%d_%d_%d.%s", LogSaveName, time.Now().Year(), time.Now().Month(), time.Now().Day(), LogFileExt)
 
 	return fmt.Sprintf("%s%s", prefixPath, suffixPath)
 }

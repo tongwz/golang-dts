@@ -3,6 +3,7 @@ package api
 import (
 	"golang-dts/models"
 	"golang-dts/pkg/e"
+	"golang-dts/pkg/logging"
 	"golang-dts/pkg/util"
 	"log"
 	"net/http"
@@ -40,6 +41,10 @@ func GetAuth(c *gin.Context) {
 			}
 		} else {
 			code = e.ERROR_AUTH
+		}
+		// 如果不是正确的那么我们写入日志
+		if code != e.SUCCESS {
+			logging.Debug("token的入参问题", c.Request)
 		}
 	} else {
 		for _, err := range valid.Errors {
