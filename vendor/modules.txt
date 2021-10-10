@@ -59,6 +59,9 @@ github.com/modern-go/reflect2
 github.com/shiena/ansicolor
 # github.com/smartystreets/goconvey v0.0.0-20190731233626-505e41936337
 ## explicit
+# github.com/streadway/amqp v1.0.0
+## explicit
+github.com/streadway/amqp
 # github.com/ugorji/go v1.2.6
 ## explicit
 # github.com/ugorji/go/codec v1.2.6

@@ -2,6 +2,7 @@ package jwt
 
 import (
 	"golang-dts/pkg/e"
+	"golang-dts/pkg/logging"
 	"golang-dts/pkg/util"
 	"net/http"
 	"time"
@@ -35,6 +36,7 @@ func JWT() gin.HandlerFunc {
 				"data": "token验证失败",
 			})
 			c.Abort()
+			logging.Info("请求被阻止", c.Request)
 			return
 		}
 		c.Next()

@@ -18,6 +18,7 @@ require (
 	github.com/mattn/go-isatty v0.0.13 // indirect
 	github.com/shiena/ansicolor v0.0.0-20200904210342-c7312218db18 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190731233626-505e41936337 // indirect
+	github.com/streadway/amqp v1.0.0
 	github.com/ugorji/go v1.2.6 // indirect
 	github.com/unknwon/com v1.0.1
 	golang.org/x/crypto v0.0.0-20210616213533-5ff15b29337e // indirect
