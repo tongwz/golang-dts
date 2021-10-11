@@ -2,21 +2,22 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+	"github.com/spf13/cobra"
+	"golang-dts/pkg/logging"
+	"os"
 
-	"golang-dts/pkg/setting"
-	"golang-dts/routers"
+	"golang-dts/command"
 )
 
 func main() {
-	router := routers.InitRouter()
 
-	s := &http.Server{
-		Addr:           fmt.Sprintf(":%d", setting.HTTPPort),
-		Handler:        router,
-		ReadTimeout:    setting.ReadTimeout,
-		WriteTimeout:   setting.WriteTimeout,
-		MaxHeaderBytes: 1 << 20,
+	var cmd = &cobra.Command{Use:"comm"}
+	cmd.AddCommand(command.QueueCmd)
+	cmd.AddCommand(command.ApiCmd)
+	err := cmd.Execute()
+	if err != nil {
+		logging.Fatal("服务启动失败，有错误", err)
+		fmt.Println("服务启动失败", err)
+		os.Exit(1)
 	}
-	s.ListenAndServe()
 }

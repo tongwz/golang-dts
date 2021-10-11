@@ -1,6 +1,7 @@
 package queue
 
 import (
+	"fmt"
 	"github.com/streadway/amqp"
 	"golang-dts/pkg/logging"
 )
@@ -54,6 +55,19 @@ func (r *RabbitMQ) ReceiveRouting() {
 		panic("交换机声明失败："+err.Error())
 	}
 
+	_, err = r.channel.QueueDeclare(
+		r.QueueName,
+		true,
+		false,
+		false,
+		false,
+		nil,
+		)
+	if err != nil {
+		logging.Fatal("队列声明失败："+err.Error())
+		panic("队列声明失败："+err.Error())
+	}
+
 	// 绑定队列到exchange中
 	err = r.channel.QueueBind(
 		r.QueueName,
@@ -62,6 +76,10 @@ func (r *RabbitMQ) ReceiveRouting() {
 		false,
 		nil,
 		)
+	if err != nil {
+		logging.Fatal("队列绑定交换机失败："+err.Error())
+		panic("队列绑定交换机失败："+err.Error())
+	}
 
 	// 获取队列消息进行消费
 	msg, err := r.channel.Consume(
@@ -78,7 +96,9 @@ func (r *RabbitMQ) ReceiveRouting() {
 	// 协程处理 队列监听消费
 	go func() {
 		for info := range msg {
-			logging.Info(info.Body)
+			logging.Info(string([]byte(info.Body)))
+			fmt.Printf("%s",info.Body)
+			fmt.Printf("%T",info.Body)
 		}
 	}()
 	<-forever

@@ -19,3 +19,9 @@ var PublishQueueMap = map[int] publishQueue {
 	},
 }
 
+// 对应命令行执行queue监听
+var CommandString = map[string]int {
+	"test-queue" : RTest,
+	"user-upload" :1,
+}
+

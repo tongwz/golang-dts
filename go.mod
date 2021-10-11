@@ -17,7 +17,7 @@ require (
 	github.com/lib/pq v1.2.0 // indirect
 	github.com/mattn/go-isatty v0.0.13 // indirect
 	github.com/shiena/ansicolor v0.0.0-20200904210342-c7312218db18 // indirect
-	github.com/smartystreets/goconvey v0.0.0-20190731233626-505e41936337 // indirect
+	github.com/spf13/cobra v1.2.1
 	github.com/streadway/amqp v1.0.0
 	github.com/ugorji/go v1.2.6 // indirect
 	github.com/unknwon/com v1.0.1
@@ -28,14 +28,6 @@ require (
 	google.golang.org/protobuf v1.27.1 // indirect
 	gopkg.in/ini.v1 v1.62.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776 // indirect
 )
 
-replace (
-	golang-dts/conf => D:/golang-dts/conf
-	golang-dts/middleware => D:/golang-dts/middleware
-	golang-dts/models => D:/golang-dts/models
-	golang-dts/pkg/e => D:/golang-dts/pkg/e
-	golang-dts/pkg/setting => D:/golang-dts/pkg/setting
-	golang-dts/routers => D:/golang-dts/routers
-)
+

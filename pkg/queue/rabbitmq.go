@@ -29,15 +29,16 @@ func NewRabbitMQ(queueInfo int) *RabbitMQ {
 	}
 	// 连接字符串
 	configMq := fmt.Sprintf(
-		"amqp://%s:%s@%s:%s%s", // 账号:密码@地址：端口/vhost
+		"amqp://%s:%s@%s:%s", // 账号:密码@地址：端口/vhost
 				sec.Key("USER").MustString("admin"),
 				sec.Key("PASSWORD").MustString("123456"),
 				sec.Key("HOST").MustString("127.0.0.1"),
 				sec.Key("PORT").MustString("5672"),
-				sec.Key("VHOST").MustString("/"),
+				// sec.Key("VHOST").MustString("/"),
 		)
 	// 连接配置
 	amqpConfig := amqp.Config{
+		Vhost: sec.Key("VHOST").MustString("/"),
 		Heartbeat: 1 * time.Minute,
 	}
 	// 结构体实例
