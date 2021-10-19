@@ -20,10 +20,14 @@ func getLogFilePath() string {
 }
 
 // 获取实际文件全路径
-func getLogFileFullPath() string {
+func getLogFileFullPath(LogName string) string {
 	prefixPath := getLogFilePath()
-	suffixPath := fmt.Sprintf("%s%d_%d_%d.%s", LogSaveName, time.Now().Year(), time.Now().Month(), time.Now().Day(), LogFileExt)
-
+	var suffixPath string
+	if LogName != "" {
+		suffixPath = fmt.Sprintf("%s.%s", LogName, LogFileExt)
+	} else {
+		suffixPath = fmt.Sprintf("%s%d_%d_%d.%s", LogSaveName, time.Now().Year(), time.Now().Month(), time.Now().Day(), LogFileExt)
+	}
 	return fmt.Sprintf("%s%s", prefixPath, suffixPath)
 }
 

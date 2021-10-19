@@ -19,6 +19,7 @@ var (
 	logger     *log.Logger
 	logPrefix  = ""
 	levelFlags = []string{"DEBUG", "INFO", "WARN", "ERROR", "FATAL"}
+
 )
 
 const (
@@ -30,7 +31,7 @@ const (
 )
 
 func init() {
-	filePath := getLogFileFullPath()
+	filePath := getLogFileFullPath("")
 
 	F = OpenLogFile(filePath)
 	logger = log.New(F, DefaultPrefix, log.LstdFlags)
@@ -45,6 +46,12 @@ func setPrefix(level Level) {
 	}
 
 	logger.SetPrefix(logPrefix)
+}
+
+// 设置日志名
+func SetName(name string) {
+	F = OpenLogFile(getLogFileFullPath(name))
+	logger = log.New(F, DefaultPrefix, log.LstdFlags)
 }
 
 func Debug(v ...interface{}) {

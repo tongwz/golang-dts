@@ -3,9 +3,9 @@ package queue
 import (
 	"fmt"
 	"github.com/streadway/amqp"
+	"golang-dts/pkg/e"
 	"golang-dts/pkg/logging"
 	"golang-dts/pkg/setting"
-	"golang-dts/pkg/e"
 	"time"
 )
 

@@ -3,6 +3,7 @@ package queue
 import (
 	"fmt"
 	"github.com/streadway/amqp"
+	"golang-dts/business"
 	"golang-dts/pkg/logging"
 )
 
@@ -39,7 +40,7 @@ func (r *RabbitMQ) PublishMessage (message string) {
 	}
 }
 
-func (r *RabbitMQ) ReceiveRouting() {
+func (r *RabbitMQ) ReceiveRouting(business business.InterfaceQueue) {
 	// 试探性创建交换机
 	err := r.channel.ExchangeDeclare(
 		r.ExchangeName,
@@ -96,6 +97,7 @@ func (r *RabbitMQ) ReceiveRouting() {
 	// 协程处理 队列监听消费
 	go func() {
 		for info := range msg {
+			business.Delivery(info)
 			logging.Info(string([]byte(info.Body)))
 			fmt.Printf("%s",info.Body)
 			fmt.Printf("%T",info.Body)
