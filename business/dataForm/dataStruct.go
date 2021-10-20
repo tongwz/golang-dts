@@ -1,4 +1,4 @@
-package queue
+package dataForm
 
 type BaseForm struct {
 	Api string `json:"api"`
