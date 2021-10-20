@@ -2,7 +2,7 @@ package dataForm
 
 type BaseForm struct {
 	Api string `json:"api"`
-	Version string `json:"version"`
+	Version int `json:"version"`
 	TimeStamp int64 `json:"timestamp"`
 	Data interface{} `json:"data"`
 }
@@ -17,14 +17,18 @@ type ScrmUserReportSecondFrom struct {
 	Api string `json:"api"`
 	Exchange string `json:"exchange"`
 	RoutingKey string `json:"routing_key"`
-	OnlineUserIds []int64 `json:"online_user_ids"`
-	Data ScrmUserReportThirdFrom `json:"data"`
+	OnlineUserIds []int `json:"online_user_ids"`
+	Data map[string]interface{}
 }
 
 type ScrmUserReportThirdFrom struct {
+	AppVersion string `json:"app_version"`
+	BusinessId string `json:"business_id"`
+	Channel string `json:"channel"`
+	//IsProtected string `json:"is_protected,omitempty"`
+	ReportTarget string `json:"report_target"`
 	Mobile string `json:"mobile"`
 	NickName string `json:"nick_name"`
-	RoutingKey string `json:"routing_key"`
 	Source string `json:"source"`
 	TimeRegistration string `json:"time_registration"`
 	UserNumber string `json:"user_number"`

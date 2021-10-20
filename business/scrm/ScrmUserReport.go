@@ -20,14 +20,20 @@ func (m *UserReportHandle) SetLogName() string {
 
 func (m *UserReportHandle) Delivery(msg amqp.Delivery) {
 	message := new(dataForm.ScrmUserReportFrom)
+	//message := make(map[string]interface{})
 	//isAck := true
-	if err := json.Unmarshal(msg.Body, message); err != nil {
-		logging.Fatal("scrm用户上报数据解析失败：", string([]byte(msg.Body)))
-		logging.Fatal("scrm用户上报数据解析失败：", err)
+	if err := json.Unmarshal(msg.Body, &message); err != nil {
+		logging.Fatal("scrm用户上报数据解析失败：", err.Error())
 		return
 	}
-	fmt.Println(message)
-	logging.Info(string([]byte(msg.Body)))
+	userInfo := message.Data.Data
+	regSource, ok := userInfo["reg_source"]
+	if ok {
+		fmt.Println(regSource)
+	}
+
+	fmt.Println(message.Data.Data)
+	logging.Info([]byte(msg.Body))
 	return
 }
 
